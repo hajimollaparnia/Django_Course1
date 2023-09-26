@@ -6,6 +6,10 @@ from django.urls import reverse
 
 
 class HomePageTests(TestCase):
+
+    username = 'myusername'
+    email = 'myusername@gmail.com'
+
     def test_home_page_url_by_name(self):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
@@ -24,18 +28,22 @@ class HomePageTests(TestCase):
 
 
 class AboutUsPageTests(TestCase):
+
+    username = 'myusername'
+    email = 'myusername@gmail.com'
+
     def test_aboutus_page_url_by_name(self):
         response = self.client.get(reverse('aboutus'))
         self.assertEqual(response.status_code, 200)
 
     def test_aboutus_page_content(self):
-        response = self.client.get(reverse('home'))
+        response = self.client.get(reverse('aboutus'))
         self.assertContains(response, 'About Us')
 
     def test_aboutus_page_url(self):
-        response = self.client.get('/about/')
+        response = self.client.get('/aboutus/')
         self.assertEqual(response.status_code, 200)
 
     def test_aboutus_page_template_used(self):
         response = self.client.get(reverse('aboutus'))
-        self.assertTemplateUsed(response, 'aboutus.html')
+        self.assertTemplateUsed(response, 'pages/aboutus.html')
